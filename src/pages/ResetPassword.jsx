@@ -11,11 +11,18 @@ const ResetPassword = props => {
 
       <h1>Reset Password</h1>
 
+      <div>Enter your registered email in order to receive password reset instructions.</div>
+
       <Button 
         title="Reset Password"
       />
 
-      <TextField />
+      <TextField
+        type="email"
+        placeholder="Email"
+      />
+
+      <div>Didn’t mean to click that? Sign In.</div>
 
       <Footer />
     </div>

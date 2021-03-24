@@ -18,8 +18,16 @@ const SignIn = props => {
         title="Sign In"
       />
 
-      <TextField />
-      <TextField />
+      <TextField
+        type="email"
+        placeholder="Email"
+      />
+      <TextField
+        type="password"
+        placeholder="Password"
+      />
+
+      <div>Forgot your password? Reset it here.</div>
 
       <Footer />
     </div>
