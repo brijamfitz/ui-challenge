@@ -1,3 +1,4 @@
+import './globals/page.scss';
 import React, { Fragment } from 'react';
 import { render } from 'react-dom';
 import {

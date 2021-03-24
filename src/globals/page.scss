@@ -1,0 +1,95 @@
+/*** base page setup ***/
+
+@import './reset.css';
+@import url('https://fonts.googleapis.com/css?family=Montserrat:extra-bold,medium,light');
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Montserrat';
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+button {
+  cursor: pointer;
+}
+
+.vh { // visibly hidden - not actionable
+  position: absolute !important;
+  display: flex;
+  visibility: visible;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: 1px;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+
+  &-a { // visibly hidden - but actionable
+    position: absolute !important;
+    display: block;
+    top: -1px;
+    width: 0;
+    height: 0;
+    cursor: default;
+    overflow: hidden;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+body {
+  .loader {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+}
+
+._request-active {
+  .loader {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/////// --------
+// quick fonts
+/////// --------
+
+body {
+  font-size: 12px;
+  line-height: 1.3em;
+}
+
+h1, h2, h3 {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 1.3em;
+  margin-bottom: 15px;
+}
+
+p, li, a, button {
+  font-size: 12px;
+  line-height: 1.3em;
+}
+
+p, ul, li {
+  margin-bottom: 10px;
+}
