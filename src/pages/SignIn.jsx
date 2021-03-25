@@ -211,6 +211,7 @@ const SignIn = () => {
           <ToastNotification
             icon="&#128077;"
             message="Password reset instructions have been sent."
+            isSent={globalState.passwordReset.resetPasswordSent}
           />
         }
 
