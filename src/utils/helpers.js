@@ -10,7 +10,6 @@ export async function fakeSignIn({ email, password }) {
   const signInPromise = new Promise((resolve, reject) => {
     setTimeout(() => {
       if (email === 'admin@email.com' && password === 'pass') {
-        console.log('yooo');
         resolve();
       } else {
         reject();

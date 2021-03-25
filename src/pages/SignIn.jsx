@@ -7,6 +7,7 @@ import SidePanel from '../components/SidePanel';
 import Button from '../components/Button';
 import TextField from '../components/TextField';
 import ToastNotification from '../components/ToastNotification';
+import Footer from '../components/Footer';
 
 const useStyles = createUseStyles({
   signInWrapper: {
@@ -15,7 +16,7 @@ const useStyles = createUseStyles({
     margin: '0 auto',
     color: '#403E45'
   },
-  signInForm: {
+  signInPanel: {
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 3,
@@ -34,12 +35,12 @@ const useStyles = createUseStyles({
     height: 10,
     background: '#F7F4F5',
     borderRadius: 10,
-    marginBottom: 20
+    marginBottom: 18
   },
   instructions: {
     textAlign: 'center',
-    marginTop: 20,
-    marginBottom: 35,
+    marginTop: 18,
+    marginBottom: 18,
     '& button': {
       background: 'none',
       border: 'none',
@@ -51,8 +52,10 @@ const useStyles = createUseStyles({
     }
   },
   footer: {
-    display: 'flex',
-    flexDirection: 'column'
+    position: 'fixed',
+    bottom: 0,
+    paddingBottom: 20,
+    color: '#C9C0C0'
   },
   h1: {
     fontSize: 20,
@@ -79,7 +82,9 @@ function signInReducer(state, action) {
         ...state,
         loading: false,
         error: '',
-        signedIn: true
+        signedIn: true,
+        email: '',
+        password: ''
       };
     case 'error':
       return {
@@ -93,13 +98,19 @@ function signInReducer(state, action) {
     case 'toggleView':
       return {
         ...state,
-        toggleView: !state.toggleView
+        toggleView: !state.toggleView,
+        error: '',
+        email: '',
+        password: '',
       }
     case 'resetPassword':
       return {
         ...state,
         loading: true,
-        email: ''
+        error: '',
+        signedIn: false,
+        email: '',
+        password: '',
       };
     default:
       return state;
@@ -168,7 +179,7 @@ const SignIn = () => {
         <SidePanel />
       </div>
 
-      <div className={classes.signInForm}>
+      <div className={classes.signInPanel}>
         {globalState.passwordReset.resetPasswordSent &&
           <ToastNotification
             icon="&#128077;"
@@ -185,7 +196,7 @@ const SignIn = () => {
 
           <div className={classes.divider}></div>
 
-          <form className={classes.signInForm} onSubmit={(e) => {!toggleView ? handleSignInSubmit(e) : handleResetPasswordSubmit(e)}}>
+          <form className={classes.signInPanel} onSubmit={(e) => {!toggleView ? handleSignInSubmit(e) : handleResetPasswordSubmit(e)}}>
             <TextField
               type="email"
               placeholder="Email"
@@ -217,27 +228,30 @@ const SignIn = () => {
               title={!toggleView ? 'Sign In' : 'Reset Password'}
               disabled={loading}
             />
-
-            {loading &&
-              <div>Loading...</div>
-            }
-
-            {error &&
-              <div>{error}</div>
-            }
-
-            {signedIn &&
-              <div>You successfully signed in!</div>
-            }
           </form>
+
+          {loading &&
+            <div>Loading...</div>
+          }
+
+          {error &&
+            <div>{error}</div>
+          }
+
+          {signedIn &&
+            <div>Success!</div>
+          }
 
           <div className={classes.instructions}>
             {!toggleView
               ? <div>Forgot your password? <button type="button" onClick={() => dispatch({type: 'toggleView'})}>Reset it here.</button></div>
               : <div>Didn’t mean to click that? <button type="button" onClick={() => dispatch({type: 'toggleView'})}>Sign In.</button></div>
             }
-            
           </div>
+        </div>
+
+        <div className={classes.footer}>
+          <Footer />
         </div>
       </div>
     </div>

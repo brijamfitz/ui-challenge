@@ -24,7 +24,7 @@ const TextField = (props) => {
 
   return (
     <div className={classes.inputWrapper}>
-      <input id={props.id} type={props.type} name={props.name} placeholder={props.placeholder} onChange={props.onChange} disabled={props.disabled}></input>
+      <input id={props.id} type={props.type} name={props.name} placeholder={props.placeholder} onChange={props.onChange} value={props.value || ''} disabled={props.disabled}></input>
     </div>
   )
 }

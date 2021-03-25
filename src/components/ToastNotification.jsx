@@ -54,7 +54,7 @@ const ToastNotification = (props) => {
               <div className={classes.message}>{props.message} <button type="button" onClick={() => setIsClosed(true)}>X</button></div>
             </div>
           </div>
-        : <div></div>
+        : <div />
       }
     </>
   )
