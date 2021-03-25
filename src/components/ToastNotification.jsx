@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
@@ -43,20 +43,14 @@ const useStyles = createUseStyles({
 
 const ToastNotification = (props) => {
   const classes = useStyles();
-  const [isClosed, setIsClosed] = useState(false);
 
   return (
-    <>
-      {!isClosed
-        ? <div className={classes.toastWrapper}>
-            <div className={classes.content}>
-              <div className={classes.icon}>{props.icon}</div>
-              <div className={classes.message}>{props.message} <button type="button" onClick={() => setIsClosed(true)}>X</button></div>
-            </div>
-          </div>
-        : <div />
-      }
-    </>
+    <div className={classes.toastWrapper}>
+      <div className={classes.content}>
+        <div className={classes.icon}>{props.icon}</div>
+        <div className={classes.message}>{props.message}</div>
+      </div>
+    </div>
   )
 }
 

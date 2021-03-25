@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { useStore } from '../store/StoreContext';
 import { setUser, setPasswordReset } from '../store/appReducer';
 import { fakeSignIn, resetPassword } from '../utils/helpers';
@@ -84,7 +84,8 @@ function signInReducer(state, action) {
         error: '',
         signedIn: true,
         email: '',
-        password: ''
+        password: '',
+        passwordReset: true
       };
     case 'error':
       return {
@@ -111,6 +112,12 @@ function signInReducer(state, action) {
         signedIn: false,
         email: '',
         password: '',
+        passwordReset: false
+      };
+    case "reset-password-reset":
+      return {
+        ...state,
+        passwordReset: false,
       };
     default:
       return state;
@@ -123,7 +130,8 @@ const initialState = {
   loading: false,
   error: '',
   signedIn: false,
-  toggleView: false
+  toggleView: false,
+  passwordReset: false
 };
 
 const SignIn = () => {
@@ -136,12 +144,14 @@ const SignIn = () => {
     loading,
     error,
     signedIn,
-    toggleView
+    toggleView,
+    passwordReset
   } = state;
   const user = {email, password}
 
   const handleSignInSubmit = async (e) => {
     e.preventDefault();
+
     if (email === '' || password === '') {
       dispatch({type: 'error'});
     } else {
@@ -158,12 +168,13 @@ const SignIn = () => {
 
   const handleResetPasswordSubmit = async (e) => {
     e.preventDefault();
+
     if (email === '') {
       dispatch({type: 'error'});
     } else {
       dispatch({type: 'resetPassword'});
       try {
-        await resetPassword();
+        await resetPassword({email});
         dispatch({type: 'success'});
         dispatch({type: 'toggleView'})
         globalDispatch(setPasswordReset(email));
@@ -173,6 +184,14 @@ const SignIn = () => {
     }
   };
 
+  useEffect(() => {
+    if (passwordReset) {
+      setTimeout(() => {
+        dispatch({type: 'reset-password-reset'});
+      }, 5000);
+    }
+  });
+
   return (
     <div className={classes.signInWrapper}>
       <div>
@@ -180,7 +199,7 @@ const SignIn = () => {
       </div>
 
       <div className={classes.signInPanel}>
-        {globalState.passwordReset.resetPasswordSent &&
+        {passwordReset &&
           <ToastNotification
             icon="&#128077;"
             message="Password reset instructions have been sent."
