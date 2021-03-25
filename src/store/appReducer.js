@@ -29,12 +29,10 @@ export const appReducer = (state = initialState, action = {}) => {
   }
 };
 
-export const setUser = ({user}) => {
-  console.log(user);
-  return ({
+export const setUser = (user) => ({
   type: SET_USER,
   user
-})};
+});
 
 export const setPasswordReset = (email) => ({
   type: SET_PASSWORD_RESET,

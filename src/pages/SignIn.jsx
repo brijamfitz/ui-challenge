@@ -84,8 +84,7 @@ function signInReducer(state, action) {
         error: '',
         signedIn: true,
         email: '',
-        password: '',
-        passwordReset: true
+        password: ''
       };
     case 'error':
       return {
@@ -114,7 +113,16 @@ function signInReducer(state, action) {
         password: '',
         passwordReset: false
       };
-    case "reset-password-reset":
+    case 'successReset':
+      return {
+        ...state,
+        loading: false,
+        error: '',
+        email: '',
+        password: '',
+        passwordReset: true
+      };
+    case "resetPasswordReset":
       return {
         ...state,
         passwordReset: false,
@@ -157,7 +165,7 @@ const SignIn = () => {
     } else {
       dispatch({type: 'signIn'});
       try {
-        await fakeSignIn({ email, password });
+        await fakeSignIn(user);
         dispatch({type: 'success'});
         globalDispatch(setUser(user));
       } catch (error) {
@@ -175,7 +183,7 @@ const SignIn = () => {
       dispatch({type: 'resetPassword'});
       try {
         await resetPassword({email});
-        dispatch({type: 'success'});
+        dispatch({type: 'successReset'});
         dispatch({type: 'toggleView'})
         globalDispatch(setPasswordReset(email));
       } catch (error) {
@@ -187,7 +195,7 @@ const SignIn = () => {
   useEffect(() => {
     if (passwordReset) {
       setTimeout(() => {
-        dispatch({type: 'reset-password-reset'});
+        dispatch({type: 'resetPasswordReset'});
       }, 5000);
     }
   });
