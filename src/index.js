@@ -12,7 +12,6 @@ import { initialState, appReducer } from './store/appReducer';
 
 /****** Pages *****/
 import SignIn from './pages/SignIn.jsx';
-import ResetPassword from './pages/ResetPassword.jsx';
 import NoRouteMatch from './pages/NoRouteMatch.jsx';
 
 render(
@@ -21,7 +20,6 @@ render(
       <Fragment>
         <Switch>
           <Route exact={true} path="/" component={SignIn} />
-          <Route exact={true} path="/resetPassword" component={ResetPassword} />
           <Route exact={true} path="*" component={NoRouteMatch} />
         </Switch>
       </Fragment>

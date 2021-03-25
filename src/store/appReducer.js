@@ -11,24 +11,32 @@ export const appReducer = (state = initialState, action = {}) => {
     case SET_USER:
       return {
         ...state,
-        user: action.user
+        user: {
+          email: action.email,
+          password: action.password
+        }
       };
     case SET_PASSWORD_RESET:
       return {
         ...state,
-        passwordReset: action.passwordReset
+        passwordReset: {
+          email: action.email,
+          resetPasswordSent: true
+        }
       };
     default:
       return state;
   }
 };
 
-export const setUser = (user) => ({
+export const setUser = ({user}) => {
+  console.log(user);
+  return ({
   type: SET_USER,
   user
-});
+})};
 
-export const setPasswordReset = (passwordReset) => ({
+export const setPasswordReset = (email) => ({
   type: SET_PASSWORD_RESET,
-  passwordReset
+  email
 });

@@ -1,7 +1,7 @@
 /*** base page setup ***/
 
 @import './reset.css';
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700,800');
 
 * {
   box-sizing: border-box;
@@ -26,47 +26,6 @@ a {
 
 button {
   cursor: pointer;
-}
-
-.vh { // visibly hidden - not actionable
-  position: absolute !important;
-  display: flex;
-  visibility: visible;
-  overflow: hidden;
-  width: 1px;
-  height: 1px;
-  margin: 1px;
-  border: 0;
-  padding: 0;
-  clip: rect(0 0 0 0);
-
-  &-a { // visibly hidden - but actionable
-    position: absolute !important;
-    display: block;
-    top: -1px;
-    width: 0;
-    height: 0;
-    cursor: default;
-    overflow: hidden;
-    opacity: 0;
-    margin: 0;
-    padding: 0;
-  }
-}
-
-body {
-  .loader {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
-}
-
-._request-active {
-  .loader {
-    opacity: 1;
-    visibility: visible;
-  }
 }
 
 /////// --------
