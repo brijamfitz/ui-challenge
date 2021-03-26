@@ -199,8 +199,6 @@ const SignIn = () => {
     }
   });
 
-  console.log(globalState);
-
   return (
     <div className={classes.signInWrapper}>
       <div>
