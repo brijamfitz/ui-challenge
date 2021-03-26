@@ -25,7 +25,6 @@ const Button = (props) => {
     <div className={classes.buttonWrapper}>
       <button type={props.type} disabled={props.disabled}>{props.title.toUpperCase()}</button>
     </div>
-    
   )
 }
 

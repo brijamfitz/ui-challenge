@@ -155,7 +155,6 @@ const SignIn = () => {
     toggleView,
     passwordReset
   } = state;
-  const user = {email, password}
 
   const handleSignInSubmit = async (e) => {
     e.preventDefault();
@@ -165,9 +164,9 @@ const SignIn = () => {
     } else {
       dispatch({type: 'signIn'});
       try {
-        await fakeSignIn(user);
+        await fakeSignIn({email, password});
         dispatch({type: 'success'});
-        globalDispatch(setUser(user));
+        globalDispatch(setUser({email, password}));
       } catch (error) {
         dispatch({type: 'error'});
       }
@@ -199,6 +198,8 @@ const SignIn = () => {
       }, 5000);
     }
   });
+
+  console.log(globalState);
 
   return (
     <div className={classes.signInWrapper}>
