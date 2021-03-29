@@ -1,5 +1,5 @@
 import './globals/page.scss';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
 import {
   BrowserRouter,
@@ -17,12 +17,10 @@ import NoRouteMatch from './pages/NoRouteMatch.jsx';
 render(
   <StoreProvider initialState={initialState} reducer={appReducer}>
     <BrowserRouter>
-      <Fragment>
-        <Switch>
-          <Route exact={true} path="/" component={SignIn} />
-          <Route exact={true} path="*" component={NoRouteMatch} />
-        </Switch>
-      </Fragment>
+      <Switch>
+        <Route exact={true} path="/" component={SignIn} />
+        <Route exact={true} path="*" component={NoRouteMatch} />
+      </Switch>
     </BrowserRouter>
   </StoreProvider>, document.getElementById('root')
 );
